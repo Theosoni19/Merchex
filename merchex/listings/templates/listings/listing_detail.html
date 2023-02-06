@@ -1,0 +1,23 @@
+{% extends 'listings/base.html' %}
+{% block content%}
+
+    <ul>
+        <li> Titre: {{listing.title}} </li>
+        <li> {{listing.get_type_display}} </li>
+        {% if listing.year %}
+        <li> Fabriqué en {{listing.year}} </li>
+        {% endif %}
+        {% if listing.sold %}
+        <li> Vendu </li>
+        {% else %} 
+        <li> En vente </li>
+        {% endif %}
+        {% if listing.band %}
+        <li> &#169; <a href="{% url 'band-detail' listing.band.id %}">{{listing.band}} </a> </li>
+        {% endif %}
+        <li> Description: {{listing.description}} </li>
+    </ul>
+    <a href="{% url 'listing-update' listing.id %}"> Modifier l'annonce </a>
+    <a href="{% url 'listing-delete' listing.id %}"> Supprimer l'annonce </a>
+    <a href="{% url 'listing-list' %}"> Retour à la liste des annonces </a>
+{% endblock %}
